@@ -1,0 +1,36 @@
+module TowardsEntropy
+  VERSION: String
+
+  class Dictionary
+    id: String
+    bytes: String
+  end
+
+  class Config
+    compressionLevel: (Integer | nil)?
+    bufferSize: (Integer | nil)?
+    dictionaryDirectory: (String | nil)?
+    preflightWrites: (bool | nil)?
+    handleHeadRequests: (bool | nil)?
+    dictionaryMatchMap: (Hash[String, String] | nil)?
+    logLevel: (LogLevel | nil)?
+  end
+
+  class DictionaryStore
+    self.get_dictionary: (String) -> Dictionary?
+    self.update_cache_from_dir: (String) -> void
+    self.find_dictionaries: (Array[String]?) -> Dictionary?
+
+    private
+
+    @dictionaries: Hash[String, Dictionary]
+    self.maybe_update_dictionary: (String) -> void
+    self.add_dictionary: (Dictionary) -> void
+  end
+
+  class TowardsEntropy
+    def initialize: (config: Config) -> void
+    def compress: (data: String, ?dictionaryId: String | nil) -> String
+    def decompress: (compressedData: String, ?dictionaryId: String | nil) -> String
+  end
+end

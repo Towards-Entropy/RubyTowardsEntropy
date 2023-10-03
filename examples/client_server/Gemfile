@@ -1,0 +1,7 @@
+gem 'rack'
+gem 'webrick'
+gem 'faraday'
+
+# Note that this include is just for the example. When installing the towards_entropy gem,
+# this will be part of the dependencies.
+gem 'zstd-ruby'
